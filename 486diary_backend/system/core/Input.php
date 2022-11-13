@@ -145,6 +145,10 @@ class CI_Input {
 
 		$this->security =& load_class('Security', 'core');
 
+		if($_SERVER['REQUEST_METHOD'] === 'POST' && empty($_POST)) {
+			$_POST = (array) json_decode(file_get_contents('php://input'),true);
+		}
+
 		// Do we need the UTF-8 class?
 		if (UTF8_ENABLED === TRUE)
 		{

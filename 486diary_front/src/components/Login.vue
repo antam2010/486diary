@@ -31,7 +31,9 @@ export default {
     },
     methods: {
         doSubmit() {
-            console.log(this.info.uid, this.info.pwd);
+            this.axios.post('/api/login', { params: this.info }).then(res => {
+                console.log(res);
+            });
         }
     },
 }
