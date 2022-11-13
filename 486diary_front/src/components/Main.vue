@@ -1,5 +1,9 @@
 <template>
-    ss
+    <ul>
+        <li><router-link to="/board">게시판</router-link></li>
+        <li>사진첩</li>
+        <li>채팅</li>
+    </ul>
 </template>
 
 <script>

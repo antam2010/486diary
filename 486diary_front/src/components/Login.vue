@@ -30,14 +30,8 @@ export default {
         }
     },
     mounted() {
-        this.doCheck();
     },
     methods: {
-        doCheck() {
-            if(this.$store.state.member_idx != 0) {
-                this.$router.replace('/main');
-            }
-        },
         doSubmit() {
             let me = this;
             this.axios.get('/main/login', { params: this.info }).then(res => {
@@ -50,7 +44,7 @@ export default {
                         member_nickname: row.info.member_nickname
                     }
                     me.$store.commit("setUserInfo", info);
-                    me.doCheck();
+                    this.$router.replace('/main');
                 } else {
                     alert(row.err_msg);
                 }
