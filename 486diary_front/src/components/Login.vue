@@ -29,10 +29,34 @@ export default {
             }
         }
     },
+    mounted() {
+        this.doCheck();
+    },
     methods: {
+        doCheck() {
+            if(this.$store.state.member_idx != 0) {
+                this.$router.replace('/main');
+            }
+        },
         doSubmit() {
-            this.axios.post('/api/login', { params: this.info }).then(res => {
-                console.log(res);
+            let me = this;
+            this.axios.get('/main/login', { params: this.info }).then(res => {
+                const row = res.data;
+                if (row.err === 0) {
+                    let info = {
+                        member_id: row.info.member_id,
+                        member_idx: row.info.member_idx,
+                        member_level: row.info.member_level,
+                        member_nickname: row.info.member_nickname
+                    }
+                    me.$store.commit("setUserInfo", info);
+                    me.doCheck();
+                } else {
+                    alert(row.err_msg);
+                }
+            }).catch(error => {
+                console.log(error);
+                alert("에러발생!!! 연락바람");
             });
         }
     },
