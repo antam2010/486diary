@@ -1,21 +1,25 @@
 .DS_Store
 
-application/cache/*
-!application/cache/index.html
+/486diary_backend/application/cache/*
+!/486diary_backend/application/cache/index.html
 
-application/logs/*
-!application/logs/index.html
+/486diary_backend/application/logs/*
+!/486diary_backend/application/logs/index.html
 
-!application/*/.htaccess
+!/486diary_backend/application/*/.htaccess
 
-composer.lock
-tests/mocks/database/ci_test.sqlite
+/486diary_backend/application/config/database.php
 
-user_guide_src/build/*
-user_guide_src/cilexer/build/*
-user_guide_src/cilexer/dist/*
-user_guide_src/cilexer/pycilexer.egg-info/*
-/vendor/
+/486diary_backend/composer.lock
+/486diary_backend/tests/mocks/database/ci_test.sqlite
+
+/486diary_backend/user_guide_src/build/*
+/486diary_backend/user_guide_src/cilexer/build/*
+/486diary_backend/user_guide_src/cilexer/dist/*
+/486diary_backend/user_guide_src/cilexer/pycilexer.egg-info/*
+/486diary_backend//vendor/
+
+
 
 # IDE Files
 #-------------------------
