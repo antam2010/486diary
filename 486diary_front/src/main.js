@@ -4,6 +4,7 @@ import router from './router'
 import axios from "axios";
 import store from './store/storage'
 
+
 axios.defaults.baseURL = 'http://api.486diary.com'
 const app = createApp(App)
 app.use(router).use(store).mount('#app')
