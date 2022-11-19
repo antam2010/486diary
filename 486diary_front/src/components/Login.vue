@@ -11,8 +11,7 @@
                     비밀번호:<input type="password" id="pwd" v-model="info.pwd" />
                 </label>
             </div>
-
-            <button v-on:click="doSubmit">로그인</button>
+            <button :class="cssLogin()" @click="doSubmit">로그인</button>
         </div>
     </div>
 </template>
@@ -26,14 +25,29 @@ export default {
             info: {
                 uid: '',
                 pwd: '',
-            }
+            },
+            is_tryLogin : 0
         }
     },
     mounted() {
     },
     methods: {
+        //로그인 틀렸을 시 버튼 이동
+        cssLogin() {
+            let result = "";
+            if(this.is_tryLogin === 0) return;
+
+            switch (this.is_tryLogin % 2) {
+                case 0:
+                    result = "afteroginBtn";
+                    break;
+                case 1:
+                    result = "beforeLoginBtn";
+                    break;
+            }
+            return result;
+        },
         doSubmit() {
-            let me = this;
             this.axios.get('/main/login', { params: this.info }).then(res => {
                 const row = res.data;
                 if (row.err === 0) {
@@ -43,10 +57,11 @@ export default {
                         member_level: row.info.member_level,
                         member_nickname: row.info.member_nickname
                     }
-                    me.$store.commit("setUserInfo", info);
+                    this.$store.commit("setUserInfo", info);
                     this.$router.replace('/main');
                 } else {
-                    alert(row.err_msg);
+                    this.is_tryLogin++;
+                    // alert(row.err_msg);
                 }
             }).catch(error => {
                 console.log(error);
@@ -56,4 +71,40 @@ export default {
     },
 }
 </script>
+
+<style>
+
+@keyframes before-ani {
+	from {
+		transform: translate(0%);
+	}
+	to {
+		transform: translate(100%);
+	}
+}
+
+@keyframes after-ani {
+	from {
+		transform: translate(100%);
+	}
+	to {
+		transform: translate(0%);
+	}
+}
+.beforeLoginBtn {
+	align-items: center;
+	justify-content: center;
+	border: 1px solid black;
+	background-color: #ffffff;
+	animation: before-ani 0.5s linear forwards; /* 애니메이션 적용 */
+}
+
+.afteroginBtn {
+	align-items: center;
+	justify-content: center;
+	border: 1px solid black;
+	background-color: #ffffff;
+	animation: after-ani 0.5s linear forwards; /* 애니메이션 적용 */
+}
+</style>
 
