@@ -2,10 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    redirect : { name:'login'}
-  },
-  {
-    path: '/login',
+    alias : '/login',
     name: 'login',
     component: () => import('../views/LoginView.vue')
   },
@@ -15,9 +12,15 @@ const routes = [
     component: () => import('../views/MainView.vue')
   },
   {
-    path: '/board',
+    path: '/board/list',
+    alias : '/board',
     name : 'board',
-    component: () => import('../views/BoardView.vue')
+    component: () => import('../views/board/list.vue')
+  },
+  {
+    path: '/board/view',
+    name : 'boardView',
+    component: () => import('../views/board/view.vue')
   },
 
 ]

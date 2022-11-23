@@ -13,11 +13,16 @@ class Board extends CI_Controller {
     public function list()
     {
         $res = [];
-
         $list = $this->board_m->get_list();
         $res['list'] = $list;
         $res['err'] = 0;
+        echo json_encode($res);
+    }
 
+    public function ctgList() {
+        $list = $this->config->item('board_category');
+        $res['list'] = $list;
+        $res['err'] = 0;
         echo json_encode($res);
     }
 

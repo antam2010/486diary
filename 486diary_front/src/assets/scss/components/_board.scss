@@ -1,0 +1,11 @@
+$tb_width : 80%;
+
+.board {
+
+    @include default-table($tb_width);
+    td {
+        border: 1px solid black;
+    }
+
+
+}
